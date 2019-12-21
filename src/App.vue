@@ -3,7 +3,7 @@
     <!-- <img src="./assets/logo.png"> -->
     <div class="top-nav" v-if="enterComplete">
       <div class="flex">
-        <h1>Nicole Ras</h1>
+        <h1 class="heading">Nicole Ras</h1>
         <div class="side-nav">
           <ul>
             <li>
@@ -91,6 +91,12 @@ li {
   margin: 0 8px;
 }
 
+.heading {
+  font-size: 48px;
+  margin: 5px 0;
+  /* font-weight: bold; */
+}
+
 a {
   color: red;
   text-decoration: none;
@@ -122,6 +128,7 @@ a {
   /* box-shadow: 0px 2px 5px rgba(0, 0, 0, .20); */
 }
 
+
 .side-nav {
   margin-right: 100px;
   margin-left: auto;
@@ -136,6 +143,6 @@ a {
 }
 .main-body > div {
   width: 100%;
-  padding: 50px;
+  padding: 20px 50px;
 }
 </style>
