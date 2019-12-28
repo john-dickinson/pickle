@@ -92,17 +92,21 @@ li {
 }
 
 .heading {
-  font-size: 48px;
+  font-size: 58px;
   margin: 5px 0;
   /* font-weight: bold; */
 }
 
 a {
-  color: red;
+  /* color: red; */
   text-decoration: none;
   margin: 0;
-  font-size: 20px;
+  font-size: 28px;
   /* transition: all 300ms ease; */
+}
+
+a:visited {
+  color: #2c3e50;
 }
 
 /* a:hover {
@@ -125,7 +129,7 @@ a {
   background: white;
   z-index: 999;
   border-bottom: 1px solid #ccc;
-  /* box-shadow: 0px 2px 5px rgba(0, 0, 0, .20); */
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, .10);
 }
 
 
