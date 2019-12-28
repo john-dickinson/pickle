@@ -3,28 +3,17 @@
     <!-- <img src="./assets/logo.png"> -->
     <div class="top-nav" v-if="enterComplete">
       <div class="flex">
-        <h1 class="heading">Nicole Ras</h1>
+        <div class="flex" @mouseenter="() => ( secretHover = true )" @mouseleave="() => ( secretHover = false )">
+          <router-link to="/" class="heading">Nicole Ras</router-link>
+          <img v-show="secretHover" class="hidden-img" src="https://pro2-bar-s3-cdn-cf5.myportfolio.com/16048c3b64ba2e50122e3fc333c2df96/6f3817b3-54fa-4d21-9e3b-4b90af4c0653_rwc_0x0x217x217x4096.png?h=03d63e839805e50d53fae8e9f4798371" alt="">
+        </div>
         <div class="side-nav">
           <ul>
-            <li>
-              <router-link to="/">Home</router-link>
-            </li>
-            <li>
-              <router-link to="/illustrations">Illustrations</router-link>
-            </li>
-            <li>
-              <router-link to="/design">Design</router-link>
-            </li>
-            <li>
-              <router-link to="/prints">Prints</router-link>
-            </li>
-            <li>
-              <router-link to="/about">About</router-link>
-            </li>
-            <li>
-              <router-link to="/contact">Contact</router-link>
+            <li v-for="(item, idx) in navItems" :key="idx" @mouseenter="(e) => setUnderline(e, idx)">
+              <router-link :to="item.reference">{{ item.name }}</router-link>
             </li>
           </ul>
+          <div class="underline" :style="`width: ${activeWidth}px; left: ${activeTranslation}px`"></div>
         </div>
       </div>
     </div>
@@ -47,7 +36,36 @@ export default {
     return {
       siteEntered: false,
       enterComplete: false,
-      topNav: true
+      topNav: true,
+      secretHover: false,
+      activeWidth: 0,
+      activeTranslation: 0,
+      navItems: [
+        {
+          name: 'Home',
+          reference: '/',
+        },
+        {
+          name: 'Design',
+          reference: '/design',
+        },
+        {
+          name: 'Illustration',
+          reference: '/illustrations',
+        },
+        {
+          name: 'Prints',
+          reference: '/prints',
+        },
+        {
+          name: 'About',
+          reference: '/about',
+        },
+        {
+          name: 'Contact',
+          reference: '/contact',
+        },
+      ]
     };
   },
   methods: {
@@ -56,6 +74,17 @@ export default {
       setTimeout(() => {
         this.enterComplete = true;
       }, 400);
+    },
+    setUnderline(e, idx) {
+      const totalWidth = document.querySelector('.side-nav').offsetWidth;
+      const items = [].slice.call(document.querySelectorAll('.side-nav li'));
+      const passedValues = items.filter((width, index) => index < idx);
+
+      this.activeTranslation = passedValues.reduce((total, current) =>
+        (total + current.offsetWidth + 20), 0,
+      );
+
+      this.activeWidth = e.target.offsetWidth;
     }
   }
 };
@@ -89,6 +118,20 @@ ul {
 li {
   list-style: none;
   margin: 0 8px;
+}
+
+.underline {
+  height: 4px;
+  position: absolute;
+  bottom: -18px;
+  background: black;
+  transition: all 200ms ease;
+}
+
+.hidden-img {
+  position: absolute;
+  width: 80px;
+  left: 260px;
 }
 
 .heading {
@@ -136,6 +179,7 @@ a:visited {
 .side-nav {
   margin-right: 100px;
   margin-left: auto;
+  position: relative;
 }
 
 .main-body {
