@@ -4,12 +4,12 @@
     <div class="top-nav" v-if="enterComplete">
       <div class="flex">
         <div class="flex" @mouseenter="() => ( secretHover = true )" @mouseleave="() => ( secretHover = false )">
-          <router-link to="/" class="heading">Nicole Ras</router-link>
-          <img v-show="secretHover" class="hidden-img" src="https://pro2-bar-s3-cdn-cf5.myportfolio.com/16048c3b64ba2e50122e3fc333c2df96/6f3817b3-54fa-4d21-9e3b-4b90af4c0653_rwc_0x0x217x217x4096.png?h=03d63e839805e50d53fae8e9f4798371" alt="">
+          <router-link to="/" class="heading fade-in">Nicole Ras</router-link>
+          <img v-show="secretHover" class="hidden-img" :src="path" alt="">
         </div>
         <div class="side-nav">
           <ul>
-            <li v-for="(item, idx) in navItems" :key="idx" @mouseenter="(e) => setUnderline(e, idx)">
+            <li v-for="(item, idx) in navItems" class="fade-in" :class="`delay-${idx}`" :key="idx" @mouseenter="(e) => setUnderline(e, idx)">
               <router-link :to="item.reference">{{ item.name }}</router-link>
             </li>
           </ul>
@@ -34,6 +34,7 @@ export default {
   components: { Presite },
   data() {
     return {
+      path: './static/deer-closed.png',
       siteEntered: false,
       enterComplete: false,
       topNav: true,
@@ -61,10 +62,10 @@ export default {
           name: 'About',
           reference: '/about',
         },
-        {
-          name: 'Contact',
-          reference: '/contact',
-        },
+        // {
+        //   name: 'Contact',
+        //   reference: '/contact',
+        // },
       ]
     };
   },
